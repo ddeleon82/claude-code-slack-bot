@@ -1,9 +1,9 @@
 {
   "display_information": {
-    "name": "Claude Code Bot",
-    "description": "AI-powered coding assistant using Claude Code SDK",
+    "name": "Conrad",
+    "description": "AI Chief of Staff — Freedom & Coffee",
     "background_color": "#4A154B",
-    "long_description": "This bot integrates Claude Code SDK with Slack to provide AI-powered coding assistance directly in your workspace. It supports streaming responses, maintains conversation context, and can help with code reviews, debugging, and general programming questions."
+    "long_description": "Conrad is Freedom & Coffee's AI Chief of Staff, powered by Claude Code. He provides coding assistance, project management, research, and operational support directly in Slack."
   },
   "features": {
     "app_home": {
@@ -12,7 +12,7 @@
       "messages_tab_read_only_enabled": false
     },
     "bot_user": {
-      "display_name": "Claude Code",
+      "display_name": "Conrad",
       "always_online": true
     }
   },

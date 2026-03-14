@@ -1,12 +1,11 @@
 import { App } from '@slack/bolt';
 import { ClaudeHandler } from './claude-handler';
-import { SDKMessage } from '@anthropic-ai/claude-code';
+import { SDKMessage } from '@anthropic-ai/claude-agent-sdk';
 import { Logger } from './logger';
 import { WorkingDirectoryManager } from './working-directory-manager';
 import { FileHandler, ProcessedFile } from './file-handler';
 import { TodoManager, Todo } from './todo-manager';
 import { McpManager } from './mcp-manager';
-import { permissionServer } from './permission-mcp-server';
 import { config } from './config';
 
 interface MessageEvent {
@@ -747,34 +746,6 @@ export class SlackHandler {
         this.logger.info('Bot added to channel', { channel: event.channel });
         await this.handleChannelJoin(event.channel, say);
       }
-    });
-
-    // Handle permission approval button clicks
-    this.app.action('approve_tool', async ({ ack, body, respond }) => {
-      await ack();
-      const approvalId = (body as any).actions[0].value;
-      this.logger.info('Tool approval granted', { approvalId });
-      
-      permissionServer.resolveApproval(approvalId, true);
-      
-      await respond({
-        response_type: 'ephemeral',
-        text: '✅ Tool execution approved'
-      });
-    });
-
-    // Handle permission denial button clicks
-    this.app.action('deny_tool', async ({ ack, body, respond }) => {
-      await ack();
-      const approvalId = (body as any).actions[0].value;
-      this.logger.info('Tool approval denied', { approvalId });
-      
-      permissionServer.resolveApproval(approvalId, false);
-      
-      await respond({
-        response_type: 'ephemeral',
-        text: '❌ Tool execution denied'
-      });
     });
 
     // Cleanup inactive sessions periodically

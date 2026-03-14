@@ -5,6 +5,10 @@ import { SlackHandler } from './slack-handler';
 import { McpManager } from './mcp-manager';
 import { Logger } from './logger';
 
+// Clean nested session env vars so Claude Code SDK can spawn fresh
+delete process.env.CLAUDECODE;
+delete process.env.CLAUDE_PARENT_SESSION_ID;
+
 const logger = new Logger('Main');
 
 async function start() {
